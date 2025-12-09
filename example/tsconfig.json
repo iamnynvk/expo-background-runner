@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "expo-background-runner": ["../src/index"],
+      "expo-background-runner/*": ["../src/*"]
+    }
+  }
+}
