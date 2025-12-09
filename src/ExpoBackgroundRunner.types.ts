@@ -1,19 +1,22 @@
-import type { StyleProp, ViewStyle } from 'react-native';
-
-export type OnLoadEventPayload = {
-  url: string;
+export type ExecuteEventPayload = {
+  parameters: any;
 };
 
 export type ExpoBackgroundRunnerModuleEvents = {
-  onChange: (params: ChangeEventPayload) => void;
+  onExecute: (payload: ExecuteEventPayload) => void;
 };
 
-export type ChangeEventPayload = {
-  value: string;
+export type BackgroundRunnerTaskIcon = {
+  name: string;
+  type: string;
 };
 
-export type ExpoBackgroundRunnerViewProps = {
-  url: string;
-  onLoad: (event: { nativeEvent: OnLoadEventPayload }) => void;
-  style?: StyleProp<ViewStyle>;
+export type BackgroundRunnerOptions = {
+  taskName?: string;
+  taskTitle?: string;
+  taskDesc?: string;
+  taskIcon?: BackgroundRunnerTaskIcon;
+  color?: string;
+  linkingURI?: string;
+  parameters?: any;
 };

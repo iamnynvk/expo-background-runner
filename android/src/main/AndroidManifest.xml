@@ -1,2 +1,64 @@
-<manifest>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <!-- PERMISSIONS -->
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+  <uses-permission android:name="android.permission.WAKE_LOCK" />
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+  <!-- Battery opt (optional but safe) -->
+  <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+  <application>
+
+    <!-- Notification channel (Expo config) -->
+    <meta-data
+        android:name="expo.modules.backgroundrunner.NOTIFICATION_CHANNEL"
+        android:value="background_runner_channel" />
+
+    <!-- SERVICES -->
+    <!-- MAIN FOREGROUND SERVICE -->
+    <service
+        android:name=".BackgroundRunnerService"
+        android:enabled="true"
+        android:exported="false"
+        android:foregroundServiceType="dataSync"
+        tools:ignore="ForegroundServicePermission" />
+
+    <!-- HEADLESS JS SERVICE -->
+    <service
+        android:name=".BackgroundRunnerTaskService"
+        android:enabled="true"
+        android:exported="false" />
+
+
+    <!-- RECEIVERS -->
+    <!-- ALARM RECEIVER (has to be exported true for AlarmManager) -->
+    <receiver
+        android:name=".BackgroundAlarmReceiver"
+        android:enabled="true"
+        android:exported="true" />
+
+    <!-- AUTOSTART + INTERNAL RESTART RECEIVER -->
+    <receiver
+        android:name=".BackgroundAutostartReceiver"
+        android:enabled="true"
+        android:exported="true"
+        tools:ignore="ExportedReceiver">
+
+      <!-- App internal restart -->
+      <intent-filter>
+        <action android:name="expo.backgroundrunner.RESTART" />
+      </intent-filter>
+
+      <!-- Auto-start after reboot -->
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+      </intent-filter>
+    </receiver>
+
+  </application>
 </manifest>
