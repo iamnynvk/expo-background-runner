@@ -1,6 +1,6 @@
 {
   "name": "expo-background-runner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "expo-background-runner is an Expo-compatible library that allows React Native apps to execute tasks continuously, even when the app is in the foreground, background, or completely killed. It provides a reliable way to run background operations such as syncing data, sending notifications, or performing periodic updates, with minimal setup and seamless integration into Expo projects.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
